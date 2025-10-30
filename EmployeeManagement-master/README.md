@@ -1,66 +1,84 @@
-#Employee Management System
+# Employee Management System
 
-#HOW TO RUN THIS PROJECT?#
-###FROM THE IDE:###
+## HOW TO RUN THIS PROJECT
+### FROM THE IDE
 1. Open the project in an IDE like Eclipse.
-2. You can run the DBScript provided in MySQL to create database and tables with basic values. 
-	(Creating database is necessary since hibernate- update option is used : "spring.jpa.hibernate.ddl-auto = update")
-3. In case you do not want to run file, you can change the line "spring.jpa.hibernate.ddl-auto = update"  to  "spring.jpa.hibernate.ddl-auto = create-drop"
-	in src/main/resources/application.properties file.
-4. Check your database connection in src/main/resources/application.properties file and change if needed.
-5. Go to com.employee.management
-6. Right Click on class Application.
-7. Hit "Run As Java Application" in the IDE.
-8. Check if localhost server has started.
-9. Open Postman client service on Google chrome.
-10. Hit url : "http://localhost:8080/employees" and url : "http://localhost:8080/departments"
-11. Accordingly select the request method and the url as follows:
-	Department: 
-		GET - "http://localhost:8080/departments" - gets list of all departments
-		GET - "http://localhost:8080/departments/{id}" - gets department with selected id
-		POST - "http://localhost:8080/departments" - inserts into department
-		PUT - "http://localhost:8080/departments/{id}" - updates departments with selected id
-		DELETE - "http://localhost:8080/departments" - deletes all departments
-		DELETE - "http://localhost:8080/departments/{id}" - deletes departments with selected id
-		PATCH - "http://localhost:8080/departments/{id}" - patches/updates departments with selected id
-		
-	Employee: 
-		GET - "http://localhost:8080/employees" - gets list of all employees
-		GET - "http://localhost:8080/employees/{id}" - gets employees with selected id
-		POST - "http://localhost:8080/employees" - inserts into employees
-		PUT - "http://localhost:8080/employees/{id}" - updates employees with selected id
-		DELETE - "http://localhost:8080/employees" - deletes all employees
-		DELETE - "http://localhost:8080/employees/{id}" - deletes employees with selected id
-		PATCH - "http://localhost:8080/employees/{id}" - patches/updates employees with selected id
+2. Run the DBScript in MySQL to create the database and tables.  
+   (Creating database is necessary since hibernate-update option is used: `spring.jpa.hibernate.ddl-auto = update`)
+3. If you don’t want to run the file, change  
+   `spring.jpa.hibernate.ddl-auto = update` → `spring.jpa.hibernate.ddl-auto = create-drop`  
+   in `src/main/resources/application.properties`.
+4. Check your database connection in `application.properties` and update if needed.
+5. Go to `com.employee.management`.
+6. Right-click on class `Application.java`.
+7. Select “Run As → Java Application” in the IDE.
+8. Confirm that the localhost server has started.
+9. Open Postman on your system.
+10. Try the URLs below to test the APIs:
+   - `http://localhost:8080/employees`
+   - `http://localhost:8080/departments`
 
+### API ENDPOINTS
+**Department**
+- GET `/departments` → list all departments  
+- GET `/departments/{id}` → get by ID  
+- POST `/departments` → add new department  
+- PUT `/departments/{id}` → update by ID  
+- DELETE `/departments` → delete all  
+- DELETE `/departments/{id}` → delete by ID  
+- PATCH `/departments/{id}` → patch/update by ID  
 
-#ASSUMPTIONS#
-1. DATABASE and TABLES are created in MySQL
-2. DepartmentID is a foreign key in Employee table.
-3. Make sure department table is populated with the department you refer for in employee.
-4. While inserting employee detail through postman service: give a department id for department. 
-	Eg: {
-			"employeeID": 2,
-			"firstName": "Tim",
-			"lastName": "Cook",
-			"department": 3
-		} 
-    
+**Employee**
+- GET `/employees` → list all employees  
+- GET `/employees/{id}` → get by ID  
+- POST `/employees` → add new employee  
+- PUT `/employees/{id}` → update by ID  
+- DELETE `/employees` → delete all  
+- DELETE `/employees/{id}` → delete by ID  
+- PATCH `/employees/{id}` → patch/update by ID  
 
-#TECHNOLOGY STACK#
-1. Java
-2. Eclipse Neon 4.6.0
-3. MySQL Workbench
-4. Postman for Chrome: Version 4.10.5
+---
 
+## ASSUMPTIONS
+1. Database and tables are created in MySQL.
+2. DepartmentID is a foreign key in the Employee table.
+3. Department table must be populated before adding an employee.
+4. Example JSON for POST request:
+```json
+{
+  "employeeID": 2,
+  "firstName": "Tim",
+  "lastName": "Cook",
+  "department": 3
+}
+```
 
-#DESIGN DISCUSSION#
-1. The employee table has a department id foreign key.
-2. Department table needs to have a value existing to be referred by the employee table.
-3. Get mapping will fetch the results, Post mapping will insert results, Put mapping and Patch mapping will update results, Delete mapping will delete results.
-4. You will need to create database if not, change in the application.properties file.
+---
 
+## TECHNOLOGY STACK
+- Java  
+- Spring Boot  
+- Eclipse IDE  
+- MySQL Workbench  
+- Postman API Tool
 
-### Ease of extending the program ###
-1. You can add useraccount table and assign username and password details for the employee.
-2. You can also create a system account who handles all the creation and deleting of employee and department.
+---
+
+## DESIGN DISCUSSION
+1. The Employee table has a foreign key DepartmentID.
+2. Department must exist before assigning to an employee.
+3. CRUD operations are handled by RESTful mappings.
+4. Database connection is managed through `application.properties`.
+
+---
+
+## FUTURE ENHANCEMENTS
+1. Add user authentication with roles (admin, employee).
+2. Add UI for managing employee data.
+3. Integrate with cloud database.
+
+---
+
+✨ **Developed by Aryan Nigam**  
+🎓 B.Tech (Information Technology)  
+📍 Dr. Ram Manohar Lohia Awadh University
